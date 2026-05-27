@@ -8,11 +8,15 @@
 
 **一段文案出全套小红书图文，张张有审美，越用越像你**
 
+[![Live Demo](https://img.shields.io/badge/在线体验-redcard--studio.pages.dev-B82828?style=for-the-badge)](https://redcard-studio.pages.dev)
+
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
 ![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+**🔗 在线体验：[redcard-studio.pages.dev](https://redcard-studio.pages.dev)** · 打开即用，自备 API Key / 中转地址（数据与 Key 只在你自己的浏览器里）
 
 </div>
 
