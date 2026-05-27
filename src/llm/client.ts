@@ -166,7 +166,7 @@ async function rawCallTextProvider(
       metadata: opts.snapshot?.metadata ?? {},
     },
     async () => {
-      const res = await fetch(url, {
+      const res = await proxiedFetch(url, {
     method: 'POST',
     headers,
     body: JSON.stringify({
@@ -435,7 +435,7 @@ async function callClaudeLike(
       metadata: opts.snapshot?.metadata ?? {},
     },
     async () => {
-      const res = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+      const res = await proxiedFetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
       const rawText = await res.text();
       if (!res.ok) throw new Error(`HTTP ${res.status} 来自 ${url}\n响应：${rawText.slice(0, 300)}`);
       return rawText;
@@ -723,11 +723,19 @@ export function buildResponsesImageRequestBody(
   };
 }
 
-function fetchImageProvider(_cfg: ImageProviderConfig, url: string, init: RequestInit): Promise<Response> {
+// In the browser, route https calls through a same-origin proxy
+// (`/__redcard_image_proxy`) so they bypass CORS. The proxy is provided by the
+// Vite dev/preview middleware locally, and by `_worker.js` on Cloudflare Pages.
+// Used for both text and image provider calls.
+function proxiedFetch(url: string, init: RequestInit): Promise<Response> {
   if (isBrowserRuntime() && /^https:\/\//i.test(url)) {
     return fetch(`/__redcard_image_proxy?target=${encodeURIComponent(url)}`, init);
   }
   return fetch(url, init);
+}
+
+function fetchImageProvider(_cfg: ImageProviderConfig, url: string, init: RequestInit): Promise<Response> {
+  return proxiedFetch(url, init);
 }
 
 function imageRequestConfigs(cfg: ImageProviderConfig): ImageProviderConfig[] {
