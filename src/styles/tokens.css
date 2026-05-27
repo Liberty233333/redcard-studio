@@ -1,0 +1,118 @@
+:root {
+  /* Page surfaces */
+  --bg: #FDFCF9;
+  --surface-elevated: #FFFFFF;
+
+  /* Text */
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --text-muted: #9CA3AF;
+
+  /* Accent */
+  --accent: #B82828;
+
+  /* Hairlines */
+  --hairline-frame: rgba(0, 0, 0, 0.10);
+  --hairline-soft: rgba(0, 0, 0, 0.06);
+
+  /* Dark filled actions */
+  --filled: #1F2937;
+
+  /* Semantic */
+  --success: #10B981;
+  --warning: #D97706;
+
+  /* Typography */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Microsoft YaHei",
+    "Helvetica Neue", sans-serif;
+  --font-serif-cn:
+    "Source Han Serif SC", "Noto Serif SC",
+    "Songti SC", STSong, Georgia, serif;
+  --font-serif-en:
+    Georgia, "Source Serif Pro", serif;
+  --font-mono:
+    ui-monospace, "SF Mono",
+    "JetBrains Mono", Consolas, monospace;
+
+  /* Type scale */
+  --text-display: 108px;
+  --text-display-block: 108px;
+  --text-project-title: 20px;
+  --text-section-title: 30px;
+  --text-editor-col-head: 13px;
+  --text-field-label: 11px;
+  --text-editor-title: 26px;
+  --text-editor-subtitle: 14px;
+  --text-body: 14px;
+  --text-sm: 13px;
+  --text-xs: 12px;
+  --text-micro: 10px;
+
+  /* Line heights */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-body: 1.7;
+  --leading-loose: 1.85;
+
+  /* Spacing rhythm */
+  --space-inline: 16px;
+  --space-field: 36px;
+  --space-module: 48px;
+  --space-workspace-breath: 48px;
+  --space-section: 80px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Border radii */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* Effects */
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    0 4px 12px -4px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 8px 20px -4px rgba(0, 0, 0, 0.06);
+
+  /* Motion */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 200ms;
+
+  /* Legacy aliases used by the current app shell until later phases switch markup. */
+  --bg-base: var(--bg);
+  --bg-elevated: var(--surface-elevated);
+  /* Legacy hover bg, used by pre-redesign App.tsx and theme-picker.css.
+     Phase 2/3 should introduce a proper --surface-hover token and migrate. */
+  --bg-muted: #F5F3EE;
+  --ink-primary: var(--text-primary);
+  --ink-secondary: var(--text-secondary);
+  --ink-tertiary: var(--text-muted);
+  --ink-disabled: rgba(31, 41, 55, 0.28);
+  --ink-inverse: #FFFFFF;
+  --line-default: var(--hairline-frame);
+  --line-subtle: var(--hairline-soft);
+  --line-strong: var(--filled);
+  --accent-soft: rgba(184, 40, 40, 0.10);
+  --accent-glow: rgba(184, 40, 40, 0.12);
+  --state-success: var(--success);
+  --state-warning: var(--warning);
+  --font-sans-en: var(--font-sans);
+  --font-sans-cn: var(--font-sans);
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: var(--shadow-card);
+  --shadow-lg: var(--shadow-card-hover);
+}

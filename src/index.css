@@ -1,0 +1,62 @@
+/* Card theme webfonts (swiss / editorial / architectural).
+   Main UI uses system fonts via tokens.css. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@500;600&display=swap');
+@import "./styles/tokens.css";
+@import "tailwindcss";
+
+html {
+  background: var(--bg-base);
+  color: var(--ink-primary);
+  font-feature-settings: "kern" 1, "palt" 1;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans-en), var(--font-sans-cn);
+  background: var(--bg-base);
+  color: var(--ink-primary);
+  font-feature-settings: "kern" 1, "palt" 1;
+}
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif-en), var(--font-serif-cn);
+  --font-mono: var(--font-mono);
+  --color-rose-600: var(--accent);
+  --color-emerald-500: var(--state-success);
+  --color-zinc-100: var(--bg-muted);
+  --color-zinc-200: var(--line-default);
+  --color-zinc-300: var(--ink-disabled);
+  --color-zinc-500: var(--ink-tertiary);
+  --color-zinc-800: var(--ink-secondary);
+  --color-zinc-900: var(--ink-primary);
+}
+
+/* Custom Scrollbar for Light Mode */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--line-default);
+  border-radius: var(--radius-sm);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-disabled);
+}
+
+@utility writing-vertical-rl {
+  writing-mode: vertical-rl;
+}
+
+@utility paper-texture {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5e3t4eHh7e3tuamptbW1zc3N3d3dtbW13d3dtbW17e3t3d3dtbW13d3dtbW13d3dtbW13d3dtbW13d3d3d3dB9W5CAAAABnRSTlMAYmJiYmJi7C8v8AAAAERJREFUeNpjYGRkAAMGBgYGRpYmFhY2DjYONm42bjZuNm42bjZuNm42bjZuNm42bjZuNm42bjZuNm42bjZuNm42bjZuNm4zAM8fAb6zcyXMAAAAAElFTkSuQmCC");
+  background-repeat: repeat;
+  opacity: 0.05;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}

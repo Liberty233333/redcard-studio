@@ -1,0 +1,446 @@
+/* =============================================================
+   THEME · Swiss Grid (Deep Ink Blue)
+   规范见 ./SPEC.md — 任何冲突以 SPEC.md 为真值
+   尺度：450×600 预览（spec 中 540×720 缩放因子 0.833）
+   ============================================================= */
+
+.swiss-card {
+  --sw-paper:    #F5F4F1;
+  --sw-ink:      #1A1A1A;
+  --sw-sub:      #3C3A36;
+  --sw-accent:   #D97706;
+  --sw-mute:     #888888;
+  --sw-img-bg:   #DDD6C5;
+  --sw-img-line: rgba(11, 11, 14, 0.06);
+
+  position: relative;
+  width: 450px;
+  height: 600px;
+  background-color: var(--sw-paper);
+  background-image:
+    linear-gradient(to right, rgba(140, 130, 115, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(140, 130, 115, 0.035) 1px, transparent 1px);
+  background-size: 10.8px 9.6px;
+  color: var(--sw-ink);
+  font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-feature-settings: 'tnum' 1, 'kern' 1;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -12px rgba(11, 11, 14, 0.10),
+    0 18px 36px -18px rgba(11, 11, 14, 0.10);
+}
+
+/* ---------- TOP BAR (full bleed) ---------- */
+.sw-topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 32px;
+  background: var(--sw-accent);
+  color: var(--sw-paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.sw-topbar .left { display: flex; align-items: center; gap: 10px; }
+.sw-topbar .ntag {
+  background: rgba(255, 255, 255, 0.14);
+  padding: 2px 7px 1px;
+}
+
+/* ---------- BOT BAR (full bleed) ---------- */
+.sw-botbar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 30px;
+  background: var(--sw-paper);
+  border-top: 1px solid var(--sw-accent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sw-ink);
+}
+.sw-botbar .right {
+  color: var(--sw-accent);
+  font-weight: 900;
+}
+
+/* ===================================================
+   COVER specifics
+   =================================================== */
+
+.sw-cover .sw-hero {
+  position: absolute;
+  top: 32px; left: 0; right: 0;
+  height: 330px;
+  background: var(--sw-accent);
+  overflow: hidden;
+}
+.sw-cover .sw-hero .noise {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 0.8px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+/* image / placeholder inside hero */
+.sw-cover .sw-hero .img {
+  position: absolute;
+  background-color: var(--sw-img-bg);
+  background-image: linear-gradient(135deg, transparent 49%, var(--sw-img-line) 49% 51%, transparent 51%);
+  background-size: 9px 9px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: var(--sw-accent);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  gap: 5px;
+}
+.sw-cover .sw-hero .img.has-img {
+  background: none;
+}
+.sw-cover .sw-hero .img.has-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.sw-cover .sw-hero .img .ratio-label { font-weight: 400; font-size: 12px; letter-spacing: 0.3em; }
+.sw-cover .sw-hero .img .ratio-dim { opacity: 0.6; font-size: 8px; }
+
+.sw-cover .sw-hero .img .corner {
+  position: absolute; width: 9px; height: 9px;
+  border: 1px solid var(--sw-accent);
+  opacity: 0.5;
+}
+.sw-cover .sw-hero .img .corner.tl { top: 7px; left: 7px; border-right: 0; border-bottom: 0; }
+.sw-cover .sw-hero .img .corner.tr { top: 7px; right: 7px; border-left: 0; border-bottom: 0; }
+.sw-cover .sw-hero .img .corner.bl { bottom: 7px; left: 7px; border-right: 0; border-top: 0; }
+.sw-cover .sw-hero .img .corner.br { bottom: 7px; right: 7px; border-left: 0; border-top: 0; }
+
+/* big reverse-white hero numeral (placement depends on variant) */
+.sw-cover .sw-hero .num {
+  position: absolute;
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.82;
+  color: var(--sw-paper);
+}
+
+/* hero captions (FAN — NOTES / sub label) */
+.sw-cover .sw-hero .cap {
+  position: absolute;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+}
+.sw-cover .sw-hero .cap b {
+  color: var(--sw-paper);
+  font-weight: 400;
+  display: block;
+  letter-spacing: 0.24em;
+  margin-bottom: 3px;
+}
+.sw-cover .sw-hero .hr {
+  position: absolute;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.40);
+}
+
+/* ----- VARIANT A: 16:9 image ----- */
+.sw-cover.var-a .sw-hero .img {
+  top: 0; left: 0; right: 0;
+  height: 252px;     /* 450 * 9/16 */
+}
+.sw-cover.var-a .sw-hero .num {
+  bottom: -6px;
+  right: 20px;
+  font-size: 84px;
+}
+.sw-cover.var-a .sw-hero .cap {
+  bottom: 26px;
+  left: 20px;
+}
+.sw-cover.var-a .sw-hero .hr {
+  bottom: 20px;
+  left: 20px;
+  width: 48px;
+}
+
+/* ----- VARIANT B: 9:16 image (right) ----- */
+.sw-cover.var-b .sw-hero .img {
+  top: 0; right: 0; bottom: 0;
+  width: 186px;      /* 330 * 9/16 */
+}
+.sw-cover.var-b .sw-hero .num {
+  bottom: -12px;
+  left: 16px;
+  font-size: 184px;
+}
+.sw-cover.var-b .sw-hero .cap.cap-tl {
+  top: 16px;
+  left: 20px;
+  font-size: 10px;
+  color: var(--sw-paper);
+  font-weight: 400;
+}
+.sw-cover.var-b .sw-hero .cap.cap-bl {
+  top: 38px;
+  left: 20px;
+  max-width: 200px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+}
+.sw-cover.var-b .sw-hero .hr {
+  top: 96px;
+  left: 20px;
+  width: 40px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ----- VARIANT C: 1:1 image (right) ----- */
+.sw-cover.var-c .sw-hero .img {
+  top: 0; right: 0; bottom: 0;
+  width: 330px;      /* = hero height */
+}
+.sw-cover.var-c .sw-hero .cap.cap-stack {
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  line-height: 1.5;
+}
+.sw-cover.var-c .sw-hero .cap.cap-stack b {
+  margin-bottom: 0;
+}
+.sw-cover.var-c .sw-hero .num {
+  bottom: -6px;
+  left: 16px;
+  font-size: 84px;
+}
+.sw-cover.var-c .sw-hero .hr {
+  top: 92px;
+  left: 20px;
+  width: 30px;
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* ----- EDITORIAL section (cover bottom + body main) ----- */
+.sw-editorial {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+}
+.sw-cover .sw-editorial {
+  top: 380px;        /* below hero (32 + 330) + 18 breathing */
+  bottom: 36px;      /* above bot bar */
+}
+
+.sw-editorial .meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.sw-editorial .meta .left {
+  color: var(--sw-accent);
+  font-weight: 900;
+}
+.sw-editorial .meta .right {
+  color: var(--sw-mute);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-weight: 400;
+}
+
+.sw-title {
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--sw-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.sw-chip {
+  display: inline-block;
+  background: var(--sw-accent);
+  color: var(--sw-paper);
+  padding: 0 10px 5px;
+  margin-left: 5px;
+  position: relative;
+  top: -1px;
+  border-radius: 1px;
+  font-weight: 900;
+}
+
+.sw-short-rule {
+  width: 32px;
+  height: 2px;
+  background: var(--sw-accent);
+  margin: 14px 0 12px;
+}
+
+.sw-sub {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--sw-sub);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+.sw-sub .uline {
+  color: var(--sw-accent);
+  border-bottom: 1px solid var(--sw-accent);
+  padding-bottom: 1px;
+  font-weight: 400;
+}
+
+/* ===================================================
+   BODY card — same chrome (topbar/botbar), markdown content in middle
+   =================================================== */
+
+.sw-body .sw-body-head {
+  position: absolute;
+  top: 31px;
+  left: 26px;
+  right: 26px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-size: 10.8px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.sw-head-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 9.6px;
+  min-width: 0;
+  color: var(--sw-ink);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+}
+.sw-body .sw-mark {
+  display: inline-block;
+  width: 13.2px;
+  height: 13.2px;
+  flex: 0 0 auto;
+  background: var(--sw-accent);
+}
+.sw-page-count {
+  color: var(--sw-mute);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+}
+
+.sw-body .sw-body-content {
+  position: absolute;
+  top: 86px;
+  left: 26px;
+  right: 26px;
+  bottom: 52px;
+  font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.78;
+  color: var(--sw-ink);
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.sw-body-content p { margin: 0 0 0.52em; }
+.sw-body-content h1 {
+  font-weight: 500;
+  font-size: 1.45em;
+  line-height: 1.4;
+  letter-spacing: 0;
+  font-variant-numeric: lining-nums;
+  margin: 0.5em 0 0.45em;
+  color: var(--sw-accent);
+}
+.sw-body-content h2 {
+  font-weight: 500;
+  font-size: 1.28em;
+  line-height: 1.4;
+  margin: 0.6em 0 0.3em;
+  color: var(--sw-accent);
+  letter-spacing: 0;
+  padding-left: 0;
+  border-left: 0;
+}
+.sw-body-content h3 {
+  font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-weight: 500;
+  font-size: 1.08em;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+  margin: 0.8em 0 0.35em;
+  color: var(--sw-accent);
+}
+.sw-body-content .sw-bold {
+  font-weight: 500;
+  color: var(--sw-accent);
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.sw-body-content .sw-italic {
+  font-style: italic;
+  color: var(--sw-sub);
+}
+.sw-body-content .sw-list {
+  padding-left: 1em;
+  text-indent: -1em;
+  margin-bottom: 0.52em;
+}
+.sw-body-content .sw-quote {
+  margin: 0.45em 0 0.52em;
+  padding-left: 0.85em;
+  border-left: 3px solid var(--sw-accent);
+  color: var(--sw-accent);
+  font-weight: 500;
+}
+.sw-body-content .sw-divider {
+  width: 54px;
+  height: 2px;
+  background: var(--sw-accent);
+  margin: 1em 0;
+}
+.sw-body-content .sw-bullet {
+  display: inline-block;
+  width: 0.45em;
+  height: 0.45em;
+  background: var(--sw-accent);
+  margin-right: 0.5em;
+  vertical-align: 0.1em;
+}
+.sw-bottom-bar {
+  position: absolute;
+  left: 26px;
+  bottom: 31px;
+  width: 54px;
+  height: 1.8px;
+  background: var(--sw-accent);
+}

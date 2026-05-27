@@ -1,0 +1,510 @@
+/* =============================================================
+   THEME · Architectural Frame (建筑制图)
+   规范见 ./SPEC.md — 任何冲突以 SPEC.md 为真值
+   尺度：450×600 预览
+   ============================================================= */
+
+.arch-card {
+  --a-paper:    #F1EFE8;
+  --a-img-bg:   #E2DDCB;
+  --a-prussian: #2A2A2A;
+  --a-blue:     #1F4FA8;
+  --a-brick:    var(--a-blue);
+
+  position: relative;
+  width: 450px;
+  height: 600px;
+  background: var(--a-paper);
+  color: var(--a-prussian);
+  font-family: 'Jost', 'Songti SC', 'STSong', 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -12px rgba(30, 58, 95, 0.18),
+    0 18px 36px -18px rgba(30, 58, 95, 0.18);
+}
+
+/* ----- 网格底纹（细 + 粗双层） ----- */
+.arch-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(to right,  rgba(30, 58, 95, 0.10) 0.6px, transparent 0.6px) 0 0 / 30px 30px,
+    linear-gradient(to bottom, rgba(30, 58, 95, 0.10) 0.6px, transparent 0.6px) 0 0 / 30px 30px,
+    linear-gradient(to right,  rgba(30, 58, 95, 0.045) 0.4px, transparent 0.4px) 0 0 / 7.5px 7.5px,
+    linear-gradient(to bottom, rgba(30, 58, 95, 0.045) 0.4px, transparent 0.4px) 0 0 / 7.5px 7.5px;
+}
+
+/* ----- 配图区 (universal) ----- */
+.arch-img {
+  position: absolute;
+  background: var(--a-img-bg);
+  overflow: hidden;
+  z-index: 2;
+}
+.arch-img.has-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+/* X 内对角虚线 */
+.arch-img-diag {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, transparent calc(50% - 0.3px), rgba(30, 58, 95, 0.28) calc(50% - 0.3px), rgba(30, 58, 95, 0.28) calc(50% + 0.3px), transparent calc(50% + 0.3px)),
+    linear-gradient(45deg,  transparent calc(50% - 0.3px), rgba(30, 58, 95, 0.28) calc(50% - 0.3px), rgba(30, 58, 95, 0.28) calc(50% + 0.3px), transparent calc(50% + 0.3px));
+  pointer-events: none;
+}
+/* 4 角砖红角标 */
+.arch-img-corner {
+  position: absolute;
+  width: 8px; height: 8px;
+  border: 1.2px solid var(--a-brick);
+  pointer-events: none;
+}
+.arch-img-corner.tl { top: -1px; left: -1px;    border-right: 0; border-bottom: 0; }
+.arch-img-corner.tr { top: -1px; right: -1px;   border-left: 0;  border-bottom: 0; }
+.arch-img-corner.bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
+.arch-img-corner.br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+/* IMG · 宽 × 高 居中标注 */
+.arch-img-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.30em;
+  color: var(--a-prussian);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ----- 横向尺寸标注线（顶部） ----- */
+.arch-dim-h {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 8px;
+  z-index: 3;
+}
+.arch-dim-h .cap  { width: 1px; height: 6px; background: var(--a-prussian); flex: 0 0 auto; }
+.arch-dim-h .line { flex: 1; height: 0.5px; background: var(--a-prussian); }
+.arch-dim-h .label {
+  background: var(--a-paper);
+  padding: 0 6px;
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.20em;
+  color: var(--a-prussian);
+}
+
+/* ----- 纵向尺寸标注线（侧边） ----- */
+.arch-dim-v {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 8px;
+  z-index: 3;
+}
+.arch-dim-v .cap  { width: 6px; height: 1px; background: var(--a-prussian); flex: 0 0 auto; }
+.arch-dim-v .line { width: 0.5px; flex: 1; background: var(--a-prussian); }
+.arch-dim-v .label {
+  background: var(--a-paper);
+  padding: 6px 0;
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.20em;
+  color: var(--a-prussian);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ----- 标题 / 副标 / 引线 ----- */
+.arch-title-area {
+  position: absolute;
+  z-index: 3;
+}
+.arch-title {
+  margin: 0;
+  font-family: 'PingFang SC', 'Noto Sans SC', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.10;
+  color: var(--a-prussian);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.arch-title-em {
+  font-weight: 100;
+  font-style: italic;
+  color: var(--a-brick);
+  letter-spacing: -0.01em;
+}
+.arch-rule {
+  width: 32px;
+  height: 1.5px;
+  background: var(--a-brick);
+  margin: 10px 0 6px;
+}
+.arch-subtitle {
+  margin: 0;
+  font-family: 'PingFang SC', 'Noto Sans SC', sans-serif;
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.30em;
+  color: var(--a-prussian);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.arch-subtitle .cn {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  margin-left: 4px;
+}
+.arch-subdesc {
+  margin: 10px 0 0;
+  font-family: 'PingFang SC', 'Noto Sans SC', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--a-prussian);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.arch-subdesc .em {
+  color: var(--a-prussian);
+  font-weight: 600;
+}
+
+/* ----- Footer ----- */
+.arch-footer {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  z-index: 4;
+}
+.arch-footer .l { color: var(--a-prussian); font-weight: 400; }
+.arch-footer .r { color: var(--a-brick);    font-weight: 700; }
+
+/* =============================================================
+   FIG.03 / 9:16  (主参考版式)
+   左侧 9:16 图 + 右侧 [A]-[D] 元数据栈 + [V] PORTRAIT 块
+   底部大标题 + 副标 + 子描述
+   ============================================================= */
+
+.arch-cover.var-9to16 .arch-img {
+  top: 24px; left: 28px;
+  width: 162px; height: 288px;
+}
+.arch-cover.var-9to16 .arch-dim-h.top {
+  top: 10px; left: 28px; width: 162px;
+}
+.arch-cover.var-9to16 .arch-dim-v.left {
+  top: 24px; left: 8px; height: 288px;
+}
+
+/* 右栏：与图同高的 [A]-[D] meta stack + [V] PORTRAIT 块 */
+.arch-cover.var-9to16 .arch-right {
+  position: absolute;
+  top: 24px;
+  left: 215px;
+  right: 28px;
+  height: 288px;             /* 与图同高 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+/* [A]-[D] 4 行 dual-column meta */
+.arch-meta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.arch-meta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 12px;
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  color: var(--a-prussian);
+}
+.arch-meta-row .l-letter {
+  font-weight: 700;
+  letter-spacing: 0.40em;
+  color: var(--a-brick);
+}
+.arch-meta-row .r-label {
+  font-weight: 700;
+  letter-spacing: 0.30em;
+  text-align: right;
+}
+.arch-meta-row .l-key {
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+.arch-meta-row .r-value {
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  text-align: right;
+  opacity: 0.85;
+}
+.arch-meta-row .l-detail {
+  grid-column: 1;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  opacity: 0.85;
+}
+
+/* [V] PORTRAIT 块：图区底部对齐 */
+.arch-portrait-block {
+  padding-top: 10px;
+  border-top: 0.5px solid rgba(30, 58, 95, 0.30);
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.arch-portrait-block .v-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.30em;
+  color: var(--a-brick);
+  margin-bottom: 5px;
+}
+.arch-portrait-block .ref {
+  color: var(--a-prussian);
+  margin-bottom: 6px;
+  opacity: 0.85;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+.arch-portrait-block .vert {
+  color: var(--a-brick);
+  font-weight: 700;
+  letter-spacing: 0.20em;
+}
+
+/* 标题区位于图区下方约 40px 处，中段保持均匀呼吸 */
+.arch-cover.var-9to16 .arch-title-area {
+  top: 352px;
+  left: 28px;
+  right: 28px;
+}
+.arch-cover.var-9to16 .arch-title { font-size: 36px; }
+
+/* =============================================================
+   FIG.01 / 1:1  方形配图，垂直布局，元数据顶/底
+   ============================================================= */
+.arch-cover.var-1to1 .arch-img {
+  top: 36px; left: 94px;
+  width: 263px; height: 263px;
+}
+.arch-cover.var-1to1 .arch-dim-h.top {
+  top: 22px; left: 94px; right: 94px;
+}
+.arch-cover.var-1to1 .arch-dim-v.left {
+  top: 36px; left: 76px; height: 263px;
+}
+.arch-cover.var-1to1 .arch-meta-grid {
+  position: absolute;
+  top: 312px; left: 28px; right: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  font-family: ui-monospace, monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--a-prussian);
+  z-index: 3;
+}
+.arch-cover.var-1to1 .arch-meta-grid > div { display: flex; flex-direction: column; gap: 2px; }
+.arch-cover.var-1to1 .arch-meta-grid .k { font-weight: 700; letter-spacing: 0.24em; }
+.arch-cover.var-1to1 .arch-meta-grid .v { font-weight: 400; letter-spacing: 0.10em; opacity: 0.85; }
+.arch-cover.var-1to1 .arch-title-area { top: 382px; left: 28px; right: 28px; }
+.arch-cover.var-1to1 .arch-title { font-size: 38px; }
+
+/* =============================================================
+   FIG.02 / 16:9  横长配图，垂直布局
+   ============================================================= */
+.arch-cover.var-16to9 .arch-img {
+  top: 36px; left: 13px;
+  width: 425px; height: 239px;
+}
+.arch-cover.var-16to9 .arch-dim-h.top {
+  top: 22px; left: 13px; right: 13px;
+}
+.arch-cover.var-16to9 .arch-dim-v.left {
+  top: 36px; left: 0px; height: 239px;
+}
+.arch-cover.var-16to9 .arch-meta-grid {
+  position: absolute;
+  top: 288px; left: 28px; right: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  font-family: ui-monospace, monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--a-prussian);
+  z-index: 3;
+}
+.arch-cover.var-16to9 .arch-meta-grid > div { display: flex; flex-direction: column; gap: 2px; }
+.arch-cover.var-16to9 .arch-meta-grid .k { font-weight: 700; letter-spacing: 0.24em; }
+.arch-cover.var-16to9 .arch-meta-grid .v { font-weight: 400; letter-spacing: 0.10em; opacity: 0.85; }
+.arch-cover.var-16to9 .arch-title-area { top: 358px; left: 28px; right: 28px; }
+.arch-cover.var-16to9 .arch-title { font-size: 36px; }
+
+/* =============================================================
+   BODY card — 同 chrome（grid + footer）+ markdown 内容
+   ============================================================= */
+/* body 内容直接占满，仅保留 footer 与背景网格 */
+.arch-body .arch-content {
+  position: absolute;
+  top: 86px;
+  left: 26px;
+  right: 26px;
+  bottom: 64px;
+  z-index: 3;
+  font-family: 'Songti SC', 'STSong', 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', serif;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.78;
+  color: var(--a-prussian);
+  letter-spacing: 0;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.arch-body-head {
+  position: absolute;
+  z-index: 3;
+  top: 31px;
+  left: 26px;
+  right: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Jost', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  color: var(--a-blue);
+  font-size: 10.8px;
+}
+.arch-rule-mark {
+  display: inline-block;
+  width: 2.4px;
+  height: 25.2px;
+  background: var(--a-blue);
+}
+.arch-note {
+  color: var(--a-blue);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+}
+
+/* body 背景网格 — 比之前清晰但仍不抢正文视线 */
+.arch-body .arch-grid {
+  display: none;
+}
+
+.arch-content p { margin: 0 0 0.52em; }
+.arch-content h1 {
+  font-family: 'Songti SC', 'STSong', 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', serif;
+  font-weight: 500;
+  font-size: 1.45em;
+  letter-spacing: 0;
+  font-variant-numeric: lining-nums;
+  line-height: 1.4;
+  margin: 0.5em 0 0.45em;
+  color: var(--a-blue);
+}
+.arch-content h2 {
+  font-family: 'Songti SC', 'STSong', 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', serif;
+  font-weight: 500;
+  font-size: 1.28em;
+  letter-spacing: 0;
+  line-height: 1.4;
+  margin: 0.6em 0 0.3em;
+  color: var(--a-blue);
+}
+.arch-content h2::before { content: none; }
+.arch-content h3 {
+  font-family: 'Songti SC', 'STSong', 'Noto Serif SC', 'PingFang SC', 'Hiragino Sans GB', serif;
+  font-weight: 500;
+  font-size: 1.08em;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+  margin: 0.8em 0 0.35em;
+  color: var(--a-blue);
+}
+.arch-content .arch-bold {
+  font-weight: 700;
+  -webkit-text-stroke: 0.18px currentColor;
+  color: var(--a-blue);
+}
+.arch-content .arch-italic {
+  font-style: italic;
+  color: rgba(42, 42, 42, 0.78);
+}
+.arch-content .arch-list { padding-left: 1em; text-indent: -1em; }
+.arch-content .arch-list { margin-bottom: 0.52em; }
+.arch-content .arch-quote {
+  margin: 0.45em 0 0.52em;
+  padding-left: 0.85em;
+  border-left: 3px solid var(--a-blue);
+  color: var(--a-blue);
+  font-weight: 500;
+}
+.arch-content .arch-divider {
+  width: 54px;
+  height: 2px;
+  background: var(--a-blue);
+  margin: 1em 0;
+}
+.arch-content .arch-bullet {
+  display: inline-block;
+  color: var(--a-blue);
+  margin-right: 0.4em;
+  font-family: 'Jost', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+}
+.arch-footer {
+  left: 26px;
+  right: 26px;
+  bottom: 29px;
+  align-items: center;
+  font-family: 'Jost', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-size: 10.8px;
+  letter-spacing: 0.2em;
+  text-transform: none;
+}
+.arch-circle {
+  width: 19.2px;
+  height: 19.2px;
+  border: 1.5px solid var(--a-blue);
+  border-radius: 50%;
+}
+.arch-page-count {
+  color: var(--a-blue);
+  font-weight: 500;
+}

@@ -1,0 +1,134 @@
+.terminal-card {
+  position: relative;
+  width: 450px;
+  height: 600px;
+  overflow: hidden;
+  user-select: none;
+  background: #14151A;
+  border: 1px solid rgba(74, 222, 128, 0.26);
+  box-shadow:
+    0 30px 60px -12px rgba(0, 0, 0, 0.42),
+    0 18px 36px -18px rgba(0, 0, 0, 0.54);
+  color: #D4D4D8;
+  font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+}
+
+.terminal-topbar {
+  position: absolute;
+  z-index: 3;
+  left: 26px;
+  right: 26px;
+  top: 31px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #6B7280;
+  font-size: 10.8px;
+  letter-spacing: 0.15em;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 400;
+}
+.terminal-topbar span:first-child {
+  color: #4ADE80;
+  font-weight: 500;
+}
+
+.terminal-content {
+  position: absolute;
+  z-index: 2;
+  left: 26px;
+  right: 26px;
+  top: 72px;
+  bottom: 86px;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-size: 1em;
+  line-height: 1.72;
+  color: #D4D4D8;
+  text-shadow: none;
+}
+
+.terminal-content p {
+  margin: 0 0 0.46em;
+}
+
+.terminal-content h1 {
+  margin: 0.35em 0 0.42em;
+  color: #4ADE80;
+  font-size: 1.45em;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.terminal-content h2 {
+  margin: 0.5em 0 0.28em;
+  color: #4ADE80;
+  font-size: 1.28em;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.terminal-content h3 {
+  margin: 0.8em 0 0.35em;
+  color: #4ADE80;
+  font-size: 1.08em;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.terminal-list {
+  padding-left: 1.35em;
+  text-indent: -1.35em;
+  margin-bottom: 0.52em;
+}
+.terminal-quote {
+  margin: 0.45em 0 0.52em;
+  padding-left: 0.85em;
+  border-left: 3px solid #4ADE80;
+  color: #4ADE80;
+  font-weight: 500;
+}
+.terminal-divider {
+  height: 1px;
+  background: #2A2D35;
+  margin: 1em 0;
+}
+
+.terminal-list > span {
+  display: inline-block;
+  width: 1.1em;
+  color: #4ADE80;
+  font-weight: 500;
+}
+
+.terminal-bold {
+  color: #4ADE80;
+  font-weight: 500;
+}
+
+.terminal-italic {
+  color: #A1A1AA;
+  font-style: italic;
+}
+
+.terminal-blank {
+  height: 1.05em;
+}
+
+.terminal-prompt {
+  position: absolute;
+  z-index: 3;
+  left: 26px;
+  right: 26px;
+  bottom: 30px;
+  padding-top: 12px;
+  border-top: 0.5px solid #2A2D35;
+  color: #4ADE80;
+  font-size: 10.8px;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

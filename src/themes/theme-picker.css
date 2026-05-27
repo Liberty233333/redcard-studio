@@ -1,0 +1,87 @@
+/* ============================================================
+   Theme picker — pill buttons (horizontal wrapped)
+   ============================================================ */
+.theme-picker-shell {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0 12px;
+  border-top: 1px solid var(--line-default);
+  border-bottom: 1px solid var(--line-default);
+}
+
+.theme-picker-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.theme-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.theme-btn {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 9px;
+  border: 1px solid var(--line-default);
+  border-radius: var(--radius-md);
+  background: var(--bg-base);
+  font-family: var(--font-sans-en), var(--font-sans-cn);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  transition: color var(--duration) var(--ease), border-color var(--duration) var(--ease), background var(--duration) var(--ease);
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.theme-btn:hover:not(.disabled) {
+  color: var(--ink-primary);
+  border-color: var(--ink-primary);
+  background: var(--bg-muted);
+}
+.theme-btn.active {
+  background: var(--bg-muted);
+  border-color: var(--ink-primary);
+  color: var(--ink-primary);
+}
+.theme-btn.disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  color: var(--ink-tertiary);
+}
+
+.theme-btn-radio {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid var(--theme-accent, var(--ink-disabled));
+}
+.theme-btn.active .theme-btn-radio {
+  border-color: var(--theme-accent, var(--ink-primary));
+  box-shadow: inset 0 0 0 2px var(--bg-elevated);
+  background: var(--theme-accent, var(--ink-primary));
+}
+
+.theme-btn-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* phase label removed; tooltip shows phase info instead */

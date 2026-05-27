@@ -1,0 +1,29 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+docs/exec-plans/active/snapshots/
+docs/knowledge/style-profile/cover-samples-incoming/
+# Third-party reference photos / brand covers — kept locally, not published
+docs/knowledge/style-profile/cover-samples/
+snapshots/
+*.baiduyun.uploading.cfg
+
+# Internal planning / working docs — kept locally, not published
+AGENTS.md
+ITERATION_CHECKLIST.md
+PRD.md
+PRD_v2.0_2026-05-11.md
+PRD_v3.0_2026-05-20.md
+README-v2.1.md
+codex-prompts.md
+specs/
+docs/design/
+docs/design-docs/
+docs/exec-plans/
+docs/references/
+docs/verification/
