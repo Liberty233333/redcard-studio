@@ -311,6 +311,18 @@
   margin-left: 8px;
 }
 
+.col-title .col-note {
+  color: var(--text-tertiary, var(--text-secondary));
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.4;
+  text-transform: none;
+  white-space: nowrap;
+}
+
 .col-actions {
   display: inline-flex;
   align-items: center;

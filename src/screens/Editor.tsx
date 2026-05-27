@@ -10,6 +10,7 @@ export type EditorStage = 'draft' | 'cards' | 'cover' | 'export';
 export type WorkspaceColumn = {
   id: string;
   label: string;
+  note?: ReactNode;
   status?: ReactNode;
   actions?: ReactNode;
   body: ReactNode;
@@ -246,6 +247,7 @@ function WorkspaceShell({
             <div className="col-title">
               <span>[{column.id}]</span>
               <h2>{column.label}</h2>
+              {column.note && <span className="col-note">{column.note}</span>}
               {column.status && <span className="col-status">{column.status}</span>}
             </div>
             {column.actions && <div className="col-actions">{column.actions}</div>}
@@ -348,7 +350,8 @@ function DraftStep({
         },
         {
           id: '03',
-          label: 'CHECK',
+          label: 'dbskill check',
+          note: 'from dontbesilent',
           status: draftStatus.check,
           body: (
             <div className="check-column">
@@ -405,6 +408,7 @@ function ExportStep({ columns }: { columns: WorkspaceColumn[] }) {
             <div className="col-title">
               <span>[{column.id}]</span>
               <h2>{column.label}</h2>
+              {column.note && <span className="col-note">{column.note}</span>}
               {column.status && <span className="col-status">{column.status}</span>}
             </div>
             {column.actions && <div className="col-actions">{column.actions}</div>}
